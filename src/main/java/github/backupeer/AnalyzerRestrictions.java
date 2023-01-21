@@ -17,7 +17,7 @@ public class AnalyzerRestrictions {
     List<String> dirs, ignoredDirs, filenames, ignoredFilenames;
     boolean recursive;
 
-    public AnalyzerRestrictions(){
+    public AnalyzerRestrictions() {
         this.dirs = new ArrayList<>();
         this.ignoredDirs = new ArrayList<>();
         this.filenames = new ArrayList<>();
@@ -95,11 +95,12 @@ public class AnalyzerRestrictions {
     public void toJSON(String path) throws IOException {
         path = FilenameUtils.separatorsToSystem(path);
         Path parent = Path.of(path).getParent();
+        String parentPath = parent.toString();
 
-        if (path == null || path == "" ||path == "." || path == FilenameUtils.separatorsToSystem("./")){
+        if (parentPath == null || parentPath == "" || parentPath == "." || parentPath == FilenameUtils.separatorsToSystem("./")) {
             exportJSON(path);
             return;
-        }else{
+        } else {
             parent.toFile().mkdirs();
             exportJSON(path);
         }
